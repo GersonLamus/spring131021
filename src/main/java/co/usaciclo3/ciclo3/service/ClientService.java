@@ -27,7 +27,7 @@ public class ClientService {
         }else{
             //Valida si el Id existe, si es vacío no existe y lo guarda
             Optional<Client> caux=clientRepository.getClient(c.getIdClient());
-            if (caux.isEmpty()){
+            if (!caux.isPresent()){
                 return clientRepository.save(c);
             }else{
                 return c;
@@ -38,7 +38,7 @@ public class ClientService {
     public Client update(Client k){
         if(k.getIdClient()!=null){
             Optional<Client> e=clientRepository.getClient(k.getIdClient());
-            if(!e.isEmpty()){
+            if(e.isPresent()){
                 if(k.getEmail() !=null){
                     e.get().setEmail(k.getEmail());
                 }

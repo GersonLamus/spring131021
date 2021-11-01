@@ -27,7 +27,7 @@ public class CategoryService {
         }else{
             //Valida si el Id existe, si es vacío no existe y lo guarda
             Optional<Category> kaux=categoryRepository.getCategory(k.getId());
-            if (kaux.isEmpty()){
+            if (!kaux.isPresent()){
                 return categoryRepository.save(k);
             }else{
                 return k;
@@ -38,7 +38,7 @@ public class CategoryService {
     public Category update(Category k){
             if(k.getId()!=null){
                 Optional<Category> e=categoryRepository.getCategory(k.getId());
-                if(!e.isEmpty()){
+                if(e.isPresent()){
                     if(k.getName()!=null){
                         e.get().setName(k.getName());
                     }

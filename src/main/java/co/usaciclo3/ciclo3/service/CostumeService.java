@@ -29,7 +29,7 @@ public class CostumeService {
         }else{
             //Valida si el Id existe, si es vacío no existe y lo guarda
             Optional<Costume> paux=costumeRepository.getCostume(p.getId());
-            if (paux.isEmpty()){
+            if (!paux.isPresent()){
                 return costumeRepository.save(p);
             }else{
                 return p;
@@ -40,7 +40,7 @@ public class CostumeService {
     public Costume update(Costume k){
         if(k.getId()!=null){
             Optional<Costume> e=costumeRepository.getCostume(k.getId());
-            if(!e.isEmpty()){
+            if(e.isPresent()){
                 if(k.getName()!=null){
                     e.get().setName(k.getName());
                 }

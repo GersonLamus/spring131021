@@ -28,7 +28,7 @@ public class MessageService {
         }else{
             //Valida si el Id existe, si es vacío no existe y lo guarda
             Optional<Message> maux=messageRepository.getMessage(m.getIdMessage());
-            if (maux.isEmpty()){
+            if (!maux.isPresent()){
                 return messageRepository.save(m);
             }else{
                 return m;
@@ -39,7 +39,7 @@ public class MessageService {
     public Message update(Message message) {
         if (message.getIdMessage()!= null) {
             Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
-            if (!e.isEmpty()) {
+            if (e.isPresent()) {
                 if (message.getMessageText()!= null) {
                     e.get().setMessageText(message.getMessageText());
                 }

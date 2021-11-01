@@ -33,7 +33,7 @@ public class ReservationService {
         }else{
             //Valida si el Id existe, si es vacío no existe y lo guarda
             Optional<Reservation> raux=reservationRepository.getReservation(r.getIdReservation());
-            if (raux.isEmpty()){
+            if (!raux.isPresent()){
                 return reservationRepository.save(r);
             }else{
                 return r;
@@ -44,7 +44,7 @@ public class ReservationService {
     public Reservation update(Reservation reservation) {
         if (reservation.getIdReservation() != null) {
             Optional<Reservation> e = reservationRepository.getReservation(reservation.getIdReservation());
-            if (!e.isEmpty()) {
+            if (e.isPresent()) {
                 if (reservation.getStartDate() != null) {
                     e.get().setStartDate(reservation.getStartDate());
                 }
